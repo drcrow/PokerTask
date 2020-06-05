@@ -1,34 +1,36 @@
-import React, { Component } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store";
+import React from 'react';
+import GoogleLogin from './components/GoogleLogin/GoogleLogin';
+import Profile from './components/Profile/Profile';
 
-import Profile from "./components/profile/Profile";
-import Landing from "./components/landing/Landing";
-import Footer from "./components/footer/Footer";
-import Navbar from "./components/navbar/Navbar";
-import PostForm from "./components/posts/PostForm";
-import Posts from "./components/posts/Posts";
+class App extends React.Component {
+  state = {
+    isLoggedIn: false,
+    userProfile: null,
+  };
 
-import "./App.css";
+  login = (userData) => {
+    this.setState({
+      isLoggedIn: true,
+      userProfile: userData.user,
+    });
+  };
 
-class App extends Component {
+  logout = () => {
+    this.setState({
+      isLoggedIn: false,
+      userProfile: null,
+    });
+  };
+
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <Route exact path="/" component={Landing} />
-            <div className="container">
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/create" component={PostForm} />
-              <Route exact path="/all-posts" component={Posts} />
-            </div>
-            <Footer />
-          </div>
-        </Router>
-      </Provider>
+      <>
+        {this.state.isLoggedIn ? (
+          <Profile user={this.state.userProfile} logout={this.logout} />
+        ) : (
+          <GoogleLogin login={this.login} />
+        )}
+      </>
     );
   }
 }

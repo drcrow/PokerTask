@@ -1,54 +1,91 @@
-<p align="center">
-  
-<h1 align="center"> Poker Task <br> MERN with Google Auth </h1>
+# mern-google-login
 
-<p align="center"><i>A planning poker app made using MERN stack with authenticates user based on their Google login.</i><p align="center">
+Authentication flow for MERN stack application using google OAuth 2.0. 
 
-</p>
+This oauth flow is more secure and you don't have to reload your react app and go through multiple redirections to authenticate client.
 
-<h2 align="center">Live here: https://xxxxxxxxxxx.herokuapp.com/ </h2>
+## App flow
 
+![Untitled Diagram](https://user-images.githubusercontent.com/29760858/65579674-a4d22c00-df91-11e9-8303-dc97e5bb0dbf.png)
 
-### Installing
+And the image blow is from [google docs](https://developers.google.com/identity/sign-in/web/server-side-flow)
 
-Follow these steps to run this project in your local computer.
+![server_side_code_flow](https://user-images.githubusercontent.com/29760858/65676251-fac5d300-e068-11e9-90a6-9ecdcedd0436.png)
 
-```
-$ https://github.com/drcrow/PokerTask.git
-$ cd PokerTask
-$ npm i
-$ npm run client-install
-```
+## Installation
 
-Now, to run both the server and client on port `5000` and `3000` respectively, run:
+### 1. Clone the repository & install dependencies
 
-```
-$ npm run dev
-```
+```bash
+git clone https://github.com/Shahzayb/mern-google-login.git
 
-To run only the server, run:
+cd mern-google-login
 
-```
-$ npm run server
+npm install
+
+cd client & npm install
 ```
 
-To run only the client, run:
+### 2. Obtain OAuth 2.0 credentials from the Google API Console.
+
+Visit the [Google API Console](https://console.developers.google.com/) to obtain OAuth 2.0 credentials such as a client ID and client secret that are known to both Google and your application. 
+Don't store your client secret in your React app. You only need client id in your react app to get the authorization grant code. 
+And you should store client secret in node app. 
+
+
+### 3. Add Authorized JavaScript Origins
+
+Go to [Google API Console](https://console.developers.google.com/). And select your project & then add JavaScript Origins Url
+![Capture](https://user-images.githubusercontent.com/29760858/65677289-c3582600-e06a-11e9-8a69-564a89dbe522.PNG)
+
+**This is a url of client side react app**
+ 
+ 
+**You'll notice in my code that I set the `redirect_uri` to `postmessage`, its because we need the authorization grant code without any redirection**
+
+### 4. Client Side Setup
+
+1. execute these commands
 
 ```
-$ npm run client
+cd client
+touch .env.local
 ```
 
-## Built With
+2. open `.env.local` file & enter
+   `REACT_APP_GOOGLE_CLIENT_ID=your client id provided by google`
 
-- [Node.JS](http://nodejs.org/) - Node.JS is used in the backend.
-- [React.JS](https://reactjs.org/) -Frontend library used in the project.
-- [Redux](https://redux.js.org/) - Used in addition to React.JS.
-- [Passport](https://http://passportjs.org/) - Used its Google OAuth Strategy.
+### 5. Server Side Environment Variables Setup
 
-## Authors
+From the root directory of the project, type:
 
-- **Agustin Fiori** - [geekysrm](https://github.com/drcrow)
+```bash
+mkdir config
+
+cd config
+
+touch dev.env
+```
+
+**Note: These commands are for Mac/Linux users only. Windows users should type these commands in git bash**
+
+Now open the dev.env file and add `GOOGLE_CLIENT_ID=value from google apis`, `GOOGLE_CLIENT_SECRET=value from google apis`
+
+### 6. Run 'dev' script
+
+```bash
+npm run dev
+```
+
+### More information
+
+if you want more information, then please read the [one-time-code flow implementation](https://developers.google.com/identity/sign-in/web/server-side-flow)
+
+## Contributing
+
+Please help me with the documentation and improve the code.
+I'll appreciate that. For changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-This project is licensed under the MIT License.
+[MIT](https://choosealicense.com/licenses/mit/)

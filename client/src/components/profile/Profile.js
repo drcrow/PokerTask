@@ -1,65 +1,34 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
 
-import { setCurrentUser } from "../../actions/authActions";
+import './profile.css';
 
-import "./Profile.css";
-
-class Profile extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { profile: [] };
-  }
-
-  async componentDidMount() {
-    await this.props.setCurrentUser();
-    // if (!this.props.auth.isAuthenticated) {
-    //   this.props.history.push("/");
-    // }
-  }
-  render() {
-    if (this.props.auth.isAuthenticated) {
-      return (
-        <div className="jumbotron">
-          <h1 className="display-4">Howdy, {this.props.auth.user.name}!</h1>
-          <p className="lead">We got these details about you.</p>
-          <hr className="my-4" />
-          <center>
-            <div className="profile-container">
-              <div className="profile-item">
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <div>
-                      <b>Name</b>: {this.props.auth.user.name}
-                    </div>
-                  </li>
-                  <li className="list-group-item">
-                    <div>
-                      <b>Email</b>: {this.props.auth.user.email}
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div className="profile-item">
-                <img
-                  className="photo"
-                  src={this.props.auth.user.photo}
-                  alt=""
-                />
+const Profile = ({ user, logout }) => {
+  return (
+    <div className="profile-page">
+      <div className="ui centered card">
+        <div className="image">
+          <img src={user.profilePic} alt={user.name} />
+        </div>
+        <div className="content">
+          <div className="ui list">
+            <div className="item">
+              <i className="users icon"></i>
+              <div className="content">{user.name}</div>
+            </div>
+            <div className="item">
+              <i className="mail icon"></i>
+              <div className="content">
+                <a href={`mailto:${user.email}`}>{user.email}</a>
               </div>
             </div>
-          </center>
+          </div>
         </div>
-      );
-    } else return <div>Loading...</div>;
-  }
-}
+        <button className="ui inverted secondary button" onClick={logout}>
+          Logout
+        </button>
+      </div>
+    </div>
+  );
+};
 
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(
-  mapStateToProps,
-  { setCurrentUser }
-)(Profile);
+export default Profile;
