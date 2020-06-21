@@ -1,5 +1,12 @@
 body {
     font-family: 'IBM Plex Sans', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
 }
 
 .login_container {
@@ -7,4 +14,8 @@ body {
     margin-top: 50px;
     padding-bottom: 20px;
     text-align: center;
+}
+
+footer {
+    padding: 15px !important;
 }
