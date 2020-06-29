@@ -14,6 +14,10 @@ main {
     background: url(../img/blue_bg.png);
 }
 
+h3 {
+    color: #fff;
+}
+
 .login_container {
     width: 400px;
     margin-top: 50px;
@@ -33,8 +37,56 @@ footer {
     color: #3F527F;
 }
 
+.collection .collection-item.active {
+    background-color: #3F527F;
+}
+
+.collection a.collection-item:not(.active):hover {
+    background-color:#536694;
+    color: #eafaf9;
+}
+
+.cards-list {
+    background-color: #fff;
+}
+
+.cards-list .poker-card{
+    display: block;
+    text-align: center;
+    padding: 10px;
+    filter: brightness(50%);
+}
+
+.cards-list .poker-card.active{
+    filter: brightness(100%);
+}
+
+.cards-list .poker-card:hover{
+    filter: brightness(100%);
+}
+
+.user-menu {
+    display: flex;
+    align-items:center;
+}
+
+.user-avatar {
+    height: 60px;
+    vertical-align: middle;
+}
+
+.user-name {
+    vertical-align: middle;
+}
+
+
+
 @media only screen and (max-width: 992px){
     .brand-logo {
         font-size: 20px !important;
+    }
+
+    h3 {
+        font-size: 2rem;
     }
 }

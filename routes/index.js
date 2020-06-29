@@ -20,4 +20,14 @@ router.get('/dashboard', ensureAuth, (req, res) => {
     });
 });
 
+// @desc    Voting page
+// @route   GET /vote
+router.get('/vote', ensureAuth, (req, res) => {
+    console.log(req.user);
+    res.render('vote', {
+        name: req.user.firstName,
+        avatar: req.user.image
+    });
+});
+
 module.exports = router;

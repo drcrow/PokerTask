@@ -5,11 +5,12 @@
             <a href="/" class="brand-logo">&spades; PokerTask</a>
             <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
             <ul class="right hide-on-med-and-down">
-            <li><a href="/dashboard">Dashboard</a></li>
-                <li style="display: flex; align-items:center;">
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/vote">Vote</a></li>
+                <li class="user-menu">
                     <a href="/auth/logout">
-                        <img src="{{ avatar }}" alt="{{ name }}" class="circle" style="height: 60px; vertical-align: middle;">
-                        <span style="vertical-align: middle;">{{ name }}</span>
+                        <img src="{{ avatar }}" alt="{{ name }}" class="circle user-avatar">
+                        <span class="user-name">{{ name }}</span>
                     </a>
                 </li>
             </ul>
@@ -20,6 +21,7 @@
 
 <ul class="sidenav" id="mobile-demo">
 <li><a href="/dashboard">Dashboard</a></li>
+<li><a href="/dashboard">Vote</a></li>
 <li><a href="/auth/logout">{{ name }}</a></li>
 </ul>
 
